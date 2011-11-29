@@ -3,6 +3,9 @@
 = render 'shared/update_form'
 
 %h1 User List
-%ul
-  - @users.each do |user|
-    %li User: #{link_to user.name, user_path(user)}
+- if @users.empty?
+  %p Sorry, there are no users yet.
+- else
+  %ul
+    - @users.each do |user|
+      %li User: #{link_to user.name, user_path(user)}
