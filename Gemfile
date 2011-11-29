@@ -10,6 +10,9 @@ end
 
 gem 'jquery-rails'
 gem "devise", ">= 1.5.0"
+gem 'haml'
+gem 'twitter-bootstrap-rails'
+gem 'acts_as_follower'
 
 group :development, :test do
   gem "rspec-rails", ">= 2.8.0.rc1"

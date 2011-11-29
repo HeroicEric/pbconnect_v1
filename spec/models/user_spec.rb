@@ -100,4 +100,30 @@ describe User do
 
   end
 
+  describe "update associations" do
+    
+    before(:each) do
+      @user = User.create!(@attr)
+      @update1 = Factory(:update, user: @user, created_at: 1.hour.ago)
+      @update2 = Factory(:update, user: @user, created_at: 3.hours.ago)
+      @update3 = Factory(:update, user: @user, created_at: 2.hours.ago)
+    end
+
+    it "should have updates attribute" do
+      @user.should respond_to(:updates)
+    end
+
+    it "returns the correct updates in the correct order" do
+      @user.updates.should == [@update1, @update3, @update2]
+    end
+
+    it "destroys associated updates when destroyed" do
+      @user.destroy
+      [@update1, @update2, @update3].each do |update|
+        Update.find_by_id(update.id).should be_nil
+      end
+    end
+
+  end
+
 end

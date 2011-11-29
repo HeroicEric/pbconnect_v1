@@ -1,0 +1,13 @@
+%h1= @user.name
+%p Email: #{@user.email}
+- if current_user && current_user.following?(@user)
+  = button_to "Unfollow", user_follow_path(@user.to_param), :method => :delete
+- else
+  = button_to "Follow", user_follows_path(@user.to_param), class: "btn"
+
+%h3 Updates
+%ul
+  - @updates.each do |update|
+    %li 
+      %b #{@user.name}:
+      = update.content

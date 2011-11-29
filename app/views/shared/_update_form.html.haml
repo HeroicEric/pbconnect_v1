@@ -1,0 +1,7 @@
+= form_for @update do |f|
+  .clearfix
+    = f.label :content, "Something to say?"
+    .input
+      = f.text_field :content, placeholder: "Something to say?"
+  .actions
+    = f.submit "Share", class: "btn primary"

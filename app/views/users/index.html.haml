@@ -1,0 +1,4 @@
+%h1 User List
+%ul
+  - @users.each do |user|
+    %li User: #{link_to user.name, user_path(user)}

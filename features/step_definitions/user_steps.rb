@@ -104,3 +104,19 @@ end
 When /^I follow "([^"]*)"$/ do |text|
   click_link text
 end
+
+Then /^a user named "([^"]*)" exists with an email "([^"]*)"$/ do |name, email|
+  Factory(:user, name: name, email: email)
+end
+
+When /^I go to the profile page for the user with email "([^"]*)"$/ do |email|
+  user = User.find_by_email(email)
+  visit user_path(user)
+end
+
+Given /^user with email "([^"]*)" is a follower of the user with email "([^"]*)"$/ do |email1, email2|
+  follower = User.find_by_email(email1)
+  followed = User.find_by_email(email2)
+  follower.follow(followed)
+end
+
