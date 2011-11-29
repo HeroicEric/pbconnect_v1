@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
     @users = User.all
-    @update = current_user.updates.new
+    @updates = current_user.updates.new if current_user
   end
 end
