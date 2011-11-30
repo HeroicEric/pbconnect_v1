@@ -100,6 +100,17 @@ describe User do
 
   end
 
+  describe "follows" do
+    it "gets an array of ids for objects that it is following" do
+      @eric = Factory(:user)
+      @fred = Factory(:user)
+      @matt = Factory(:user)
+      @eric.follow(@fred)
+      @eric.following_type_ids('User').include?(@fred.id).should be_true
+      @eric.following_type_ids('User').include?(@matt.id).should be_false
+    end
+  end
+
   describe "update associations" do
     
     before(:each) do
@@ -122,6 +133,37 @@ describe User do
       [@update1, @update2, @update3].each do |update|
         Update.find_by_id(update.id).should be_nil
       end
+    end
+
+    describe "update feed" do
+
+      it "has a feed" do
+        @user.should respond_to(:feed)
+      end
+
+      it "includes the user's updates" do
+        @user.feed.include?(@update1).should be_true
+        @user.feed.include?(@update2).should be_true
+        @user.feed.include?(@update3).should be_true
+      end
+
+      it "shouldn't include other user's updates that user is not following" do
+        @other_user = Factory(:user)
+        @other_user_update = Factory(:update, user: @other_user)
+        @user.following?(@other_user).should == false
+        @user.feed.include?(@other_user_update).should_not be_true
+      end
+
+      it "includes updates by those that the user is following" do
+        @fred = Factory(:user)
+        @bill = Factory(:user)
+        @fred_update = Factory(:update, user: @fred)
+        @bill_update = Factory(:update, user: @bill)
+        @user.follow(@fred)
+        @user.feed.include?(@fred_update).should be_true
+        @user.feed.include?(@bill_update).should be_false
+      end
+
     end
 
   end

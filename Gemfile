@@ -13,6 +13,10 @@ gem 'haml'
 gem 'twitter-bootstrap-rails'
 gem 'acts_as_follower'
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'sqlite3'
   gem "rspec-rails", ">= 2.8.0.rc1"
@@ -24,8 +28,4 @@ group :test do
   gem "capybara", ">= 1.1.2"
   gem "database_cleaner", ">= 0.7.0"
   gem "launchy", ">= 2.0.5"
-end
-
-group :production do
-  gem 'pg'
 end

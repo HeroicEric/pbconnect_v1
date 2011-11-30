@@ -5,7 +5,9 @@ Rails3DeviseRspecCucumber::Application.routes.draw do
 
   devise_for :users
   resources :users, :only => [:show, :index] do
-    resources :follows, :only => [:index, :create, :destroy]
+    resources :follows, :only => [:index, :create, :destroy] do
+      get 'following', :on => :collection
+    end
   end
 
   resources :updates, :only => [:create, :destroy]

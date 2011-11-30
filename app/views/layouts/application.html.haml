@@ -21,8 +21,18 @@
             %ul.nav.account-nav
               = render 'shared/navigation'
     #container.container
-      - flash.each do |name, msg|
-        = content_tag :div, msg, :id => "flash_\#{name}" if msg.is_a?(String)
+      .row
+        .span16
+          - if flash[:notice]
+            .alert-message.info
+              %a.close{href: "#"} x
+              %p= flash[:notice]
+          - if flash[:error]
+            .alert-message.error
+              %a.close{href: "#"} x
+              %p
+                %strong Uh oh!
+                = flash[:error]
       #main{:role => "main"}
         = yield
       %footer

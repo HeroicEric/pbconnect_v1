@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   def index
     @users = User.all
-    @update = current_user.updates.new if user_signed_in?
+    
+    if user_signed_in?
+      @feed_items = current_user.feed
+      @update = Update.new
+    end
   end
 end

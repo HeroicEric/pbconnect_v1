@@ -7,7 +7,9 @@ class UpdatesController < ApplicationController
     if @update.save
       redirect_to root_path, notice: "Update shared successfully!"
     else
-      redirect_to :back, error: "Something when wrong."
+      @feed_items = []
+      flash[:error] = "Something was wrong with your update."
+      redirect_to root_path
     end
   end
 

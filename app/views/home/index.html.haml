@@ -1,12 +1,6 @@
-%br
-%br
 - if user_signed_in?
   = render 'shared/update_form'
-
-%h1 User List
-- if @users.empty?
-  %p Sorry, there are no users yet.
+  = render partial: 'shared/update_feed'
 - else
-  %ul
-    - @users.each do |user|
-      %li User: #{link_to user.name, user_path(user)}
+  %h1 Join the fun!
+  = link_to 'Sign up', new_user_registration_path, class: "btn large primary"

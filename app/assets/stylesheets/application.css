@@ -28,6 +28,7 @@ header nav ul li {
 }
 .topbar-wrapper {
   height: 40px;
+  margin-bottom: 15px;
 }
 .nav.account-nav {
   float: right;

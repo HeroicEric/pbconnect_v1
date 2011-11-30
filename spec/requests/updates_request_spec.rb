@@ -9,9 +9,9 @@ describe "Updates request" do
     @update3 = Factory(:update, user: @user, created_at: 2.hours.ago)
     login_user(@user)
     visit user_path(@user)
-    page.should have_content "#{@update1.content}"
-    page.should have_content "#{@update2.content}"
-    page.should have_content "#{@update3.content}"
+    page.should have_content @update1.content
+    page.should have_content @update2.content
+    page.should have_content @update3.content
   end
 
   context "an authenticated user" do
@@ -21,12 +21,22 @@ describe "Updates request" do
       login_user(@user)
     end
 
-    it "creates updates from the dashboard" do
-      visit '/'
-      fill_in "update_content", with: "Odafin Tutuola is my hero."
-      click_button "Share"
-      page.should have_content "Update shared successfully!"
-      current_path.should == "/"
+    describe "success" do
+      it "creates updates from the dashboard" do
+        visit '/'
+        fill_in "update_content", with: "Odafin Tutuola is my hero."
+        click_button "Share"
+        page.should have_content "Update shared successfully!"
+        current_path.should == "/"
+      end
+    end
+
+    describe "failure" do
+      it "reloads page when update isn't valid" do
+        visit '/'
+        click_button "Share"
+        page.should have_content "Uh oh!"
+      end
     end
 
   end

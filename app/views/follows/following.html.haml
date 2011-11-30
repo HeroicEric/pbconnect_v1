@@ -1,0 +1,5 @@
+%h1 You are Following
+%ul
+  - @following.each do |following|
+    %li
+      = link_to following.name, user_path(following)
