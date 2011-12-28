@@ -6,8 +6,11 @@
   = button_to "Follow", user_follows_path(@user.to_param), class: "btn"
 
 %h3 Updates
-%ul
-  - @updates.each do |update|
-    %li 
-      %b #{@user.name}:
-      = update.content
+- if @updates.empty?
+  %p This user doesn't have any updates yet!
+- else
+  %ul
+    - @updates.each do |update|
+      %li
+        = link_to @user.name, user_path(@user)
+        = update.content

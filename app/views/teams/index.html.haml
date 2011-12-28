@@ -1,0 +1,11 @@
+%h1 Teams
+- if current_user
+  .clearfix
+    = link_to "Create team", new_team_path, class: "btn primary"
+  %br
+- if @teams.empty?
+  %p There are no teams yet.
+- else
+  %ul
+  - @teams.each do |team|
+    = link_to team.name, team_path(team)

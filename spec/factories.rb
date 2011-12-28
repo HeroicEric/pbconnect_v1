@@ -13,4 +13,8 @@ FactoryGirl.define do
     association :user
   end
 
+  factory :team do
+    sequence(:name){|n| "Fake Team #{n}" }
+  end
+
 end
