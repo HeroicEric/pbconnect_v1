@@ -1,7 +1,7 @@
 %h1= @team.name
 
-%h3 Players
+%h3 Roster
 %ul
-  - @team.players.each do |player|
+  - @team.members.each do |member|
     %li
-      = link_to player.name, user_path(player)
+      = link_to member.name, user_path(member)

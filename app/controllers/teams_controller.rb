@@ -17,7 +17,7 @@ class TeamsController < ApplicationController
     @team = Team.new(params[:team])
 
     if @team.save
-      RosterAddition.new(team: @team, player: current_user, role: "admin")
+      RosterAddition.new(team: @team, member: current_user, role: "admin")
       redirect_to team_path(@team), notice: "Team #{@team.name} was created successfully!"
     else
       flash[:error] = "Something was wrong with your proposed team."

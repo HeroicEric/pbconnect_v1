@@ -23,7 +23,7 @@ describe "teams request" do
         fill_in "Name", with: "Dynasty"
         click_button "Save"
         team = Team.find_by_name("Dynasty")
-        team.players.where("team_memberships.role = 'admin'").should include(current_user)
+        team.members.where("team_memberships.role = 'admin'").should include(current_user)
       end
     end
   end
@@ -55,19 +55,19 @@ describe "teams request" do
 
     before(:each) do
       @team = Factory(:team)
-      3.times{ RosterAddition.new(team: @team, player: Factory(:user)) }
+      3.times{ RosterAddition.new(team: @team, member: Factory(:user)) }
       visit team_path(@team)
     end
 
-    it "lists the players" do
-      @team.players.each do |player|
-        page.should have_content player.name
+    it "lists the members" do
+      @team.members.each do |member|
+        page.should have_content member.name
       end
     end
 
     it "lists links to all players profiles" do
-      @team.players.each do |player|
-        page.should have_link(player.name, href: user_path(player))
+      @team.members.each do |member|
+        page.should have_link(member.name, href: user_path(member))
       end
     end
   end

@@ -7,8 +7,8 @@ describe TeamMembership do
     @team = Factory(:team)
 
     @attr = {
-      player: @user,
       team: @team,
+      member: @user,
       role: 'player'
     }
   end
@@ -45,13 +45,13 @@ describe TeamMembership do
       end
     end
 
-    describe "player association" do
-      it "has the player attribute" do
-        @team_membership.should respond_to :player
+    describe "member association" do
+      it "has the member attribute" do
+        @team_membership.should respond_to :member
       end
 
-      it "has the correct player" do
-        @team_membership.player.should == @user
+      it "has the correct member" do
+        @team_membership.member.should == @user
       end
     end
   end

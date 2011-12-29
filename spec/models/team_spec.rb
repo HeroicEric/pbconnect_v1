@@ -48,9 +48,9 @@ describe Team do
       team.should respond_to(:team_memberships)
     end
 
-    it "should have players attribute" do
+    it "should have members attribute" do
       team = Team.create(@attr)
-      team.should respond_to(:players)
+      team.should respond_to(:members)
     end
   end
 
