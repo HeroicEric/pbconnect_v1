@@ -25,4 +25,8 @@ class TeamsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
 end

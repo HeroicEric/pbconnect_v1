@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "teams request" do
 
-  describe "creating a team" do
+  describe "POST /team" do
     context "an authorized user" do
       before(:each) do
         @user = Factory(:user)
@@ -28,7 +28,7 @@ describe "teams request" do
     end
   end
 
-  describe "listing teams" do
+  describe "GET /teams" do
     context "on the team index page" do
       context "if there are teams in the database" do
         it "lists links to all of the teams' show pages" do
@@ -51,24 +51,44 @@ describe "teams request" do
     end
   end
 
-  describe "viewing a team" do
+  describe "GET /task" do
+    context "for everybody" do
+      before(:each) do
+        @team = Factory(:team)
+        3.times{ RosterAddition.new(team: @team, member: Factory(:user)) }
+        visit team_path(@team)
+      end
 
+      it "lists the members" do
+        @team.members.each do |member|
+          page.should have_content member.name
+        end
+      end
+
+      it "lists links to all players profiles" do
+        @team.members.each do |member|
+          page.should have_link(member.name, href: user_path(member))
+        end
+      end
+    end
+  end
+
+  describe "GET /edit" do
     before(:each) do
       @team = Factory(:team)
-      3.times{ RosterAddition.new(team: @team, member: Factory(:user)) }
-      visit team_path(@team)
+      @eric_admin = Factory(:user)
+      @fred_player = Factory(:user)
+      @bill_nobody = Factory(:user)
+      RosterAddition.new(team: @team, member: @eric_admin, role: 'admin')
     end
 
-    it "lists the members" do
-      @team.members.each do |member|
-        page.should have_content member.name
-      end
-    end
+    it "rejects players that are not admins"
+      # login_user(@fred_player)
+      # visit edit_team_path(@team)
+      # current_path.should == team_path(@team)
 
-    it "lists links to all players profiles" do
-      @team.members.each do |member|
-        page.should have_link(member.name, href: user_path(member))
-      end
+    context "current user is an admin of team" do
+      it "invites users to join the team"
     end
   end
 end

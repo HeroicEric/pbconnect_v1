@@ -6,10 +6,6 @@ class RosterAddition
       options[:role] ||= 'player'
     end
 
-    TeamMembership.create(
-      team_id: options[:team].id,
-      user_id: options[:member].id,
-      role: options[:role]
-    )
+    TeamMembership.create!(options)
   end
 end
