@@ -10,8 +10,9 @@ Rails3DeviseRspecCucumber::Application.routes.draw do
     end
   end
 
-  resources :updates, :only => [:create, :destroy]
-  resources :teams, :only => [:index, :show, :new, :create, :edit]
+  resources :updates,          :only => [:create, :destroy]
+  resources :teams,            :only => [:index, :show, :new, :create]
+  resources :team_memberships, :only => [:create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

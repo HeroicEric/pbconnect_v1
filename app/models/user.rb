@@ -20,12 +20,16 @@ class User < ActiveRecord::Base
   #
   # following_type - type of model you want ids for
   #
-  # Example: 
+  # Example:
   # @user.following_type_ids('User')
   # => [2, 5, 8, 11]
   #
   # Returns an array of integers (ids)
   def following_type_ids(following_type)
     self.follows.unblocked.for_followable_type(following_type).collect{|f| f.followable_id}
+  end
+
+  def self.not_on_team(team)
+    User.where("id NOT IN (?)", team.member_ids)
   end
 end

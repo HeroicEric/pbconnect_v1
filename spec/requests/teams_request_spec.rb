@@ -51,7 +51,7 @@ describe "teams request" do
     end
   end
 
-  describe "GET /task" do
+  describe "GET /team" do
     context "for everybody" do
       before(:each) do
         @team = Factory(:team)
@@ -73,22 +73,4 @@ describe "teams request" do
     end
   end
 
-  describe "GET /edit" do
-    before(:each) do
-      @team = Factory(:team)
-      @eric_admin = Factory(:user)
-      @fred_player = Factory(:user)
-      @bill_nobody = Factory(:user)
-      RosterAddition.new(team: @team, member: @eric_admin, role: 'admin')
-    end
-
-    it "rejects players that are not admins"
-      # login_user(@fred_player)
-      # visit edit_team_path(@team)
-      # current_path.should == team_path(@team)
-
-    context "current user is an admin of team" do
-      it "invites users to join the team"
-    end
-  end
 end

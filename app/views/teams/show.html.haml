@@ -1,7 +1,14 @@
 %h1= @team.name
 
-%h3 Roster
-%ul
-  - @team.members.each do |member|
-    %li
-      = link_to member.name, user_path(member)
+#roster
+  %h3 Roster
+
+  = form_for :team_membership, url: team_memberships_path do |f|
+    = f.hidden_field :team_id, value: @team.id
+    = f.collection_select :user_id, User.not_on_team(@team), :id, :name
+    = f.submit "Add Member", class: "btn secondary"
+
+  %ul.members
+    - @team.members.each do |member|
+      %li
+        = link_to member.name, user_path(member)

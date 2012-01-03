@@ -22,6 +22,12 @@ describe TeamMembership do
       @team_membership = TeamMembership.new(@attr.merge(role: nil))
       @team_membership.should_not be_valid
     end
+
+    it "requires that the user_id and team_id combo be unique" do
+      original_tm = Factory(:team_membership, team_id: @team.id, user_id: @user.id)
+      duplicate_tm = Factory.build(:team_membership, team_id: @team.id, user_id: @user.id)
+      duplicate_tm.should_not be_valid
+    end
   end
 
   describe "associations" do
@@ -53,6 +59,12 @@ describe TeamMembership do
       it "has the correct member" do
         @team_membership.member.should == @user
       end
+    end
+  end
+
+  describe "#create" do
+    describe "failure" do
+
     end
   end
 
