@@ -10,8 +10,11 @@ end
 gem 'jquery-rails'
 gem "devise", ">= 1.5.0"
 gem 'haml'
-gem 'twitter-bootstrap-rails'
 gem 'acts_as_follower'
+
+# Aesthetics
+gem 'twitter-bootstrap-rails'
+gem 'chosen-rails'
 
 group :production do
   gem 'pg'
