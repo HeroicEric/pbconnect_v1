@@ -22,24 +22,25 @@
             %ul.nav.account-nav
               = render 'shared/navigation'
     #container.container
-      .row
-        .span16
-          - if flash[:notice]
-            .alert-message.info
-              %a.close{href: "#"} x
-              %p= flash[:notice]
-          - if flash[:error]
-            .alert-message.error
-              %a.close{href: "#"} x
-              %p
-                %strong Uh oh!
-                = flash[:error]
-          - if flash[:success]
-            .alert-message.success
-              %a.close{href: "#"} x
-              %p
-                %strong It worked!
-                = flash[:success]
+      - unless flash.empty?
+        .row
+          .span16
+            - if flash[:notice]
+              .alert-message.info
+                %a.close{href: "#"} x
+                %p= flash[:notice]
+            - if flash[:error]
+              .alert-message.error
+                %a.close{href: "#"} x
+                %p
+                  %strong Uh oh!
+                  = flash[:error]
+            - if flash[:success]
+              .alert-message.success
+                %a.close{href: "#"} x
+                %p
+                  %strong It worked!
+                  = flash[:success]
       #main{:role => "main"}
         = yield
       %footer

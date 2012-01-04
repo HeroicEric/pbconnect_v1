@@ -3,13 +3,19 @@
 #roster
   %h3 Roster
 
-  = form_for :team_membership, url: team_memberships_path do |f|
-    = f.hidden_field :team_id, value: @team.id
-    = f.collection_select(:user_id, User.not_on_team(@team), :id, :name, {:include_blank => "Select User"}, {:class => 'chzn-select'})
-    = f.submit "Add Member", class: "btn secondary"
+  .well
+    = form_for :team_membership, url: team_memberships_path do |f|
+      = f.hidden_field :team_id, value: @team.id
+      = f.collection_select(:user_id, User.not_on_team(@team), :id, :name, {:include_blank => "Select User"}, {:class => 'chzn-select'})
+      = f.submit "Add Member", class: "btn secondary"
 
-  .members
-    - @team.members.each do |member|
-      %div{id: "member-#{member.id}", class: "member"}
-        = link_to member.name, user_path(member)
-        = button_to "Remove User", team_membership_path(@team.team_memberships.where(user_id: member.id).first), :method => :delete,  class: 'btn secondary', rel: 'delete-team-membership'
+  %table.members
+    %thead
+      %tr
+        %th Name
+        %th Actions
+    %tbody
+      - @team.members.each do |member|
+        %tr{id: "member-#{member.id}", class: "member"}
+          %td= link_to member.name, user_path(member)
+          %td= button_to "Remove User", team_membership_path(@team.team_memberships.where(user_id: member.id).first), :method => :delete,  class: 'btn danger', rel: 'delete-team-membership'
