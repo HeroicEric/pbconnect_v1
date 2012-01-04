@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "team_memberships request" do
 
-  describe "#create" do
+  describe "GET /team" do
     before(:each) do
       @team = Factory(:team)
       @eric_admin = Factory(:user, name: "Eric Kelly")
@@ -30,6 +30,23 @@ describe "team_memberships request" do
         end
         @team.role_of(@fred).should == "player"
       end
+    end
+  end
+
+  describe "DELETE /team_membership" do
+    before(:each) do
+      @team = Factory(:team)
+      @player = Factory(:user)
+      @team_membership = TeamMembership.create!(team_id: @team.id, user_id: @player.id, role: 'player')
+      visit team_path(@team)
+    end
+
+    it "deletes the team_membership of a player" do
+      within "#member-#{@player.id}" do
+        find("input[@rel='delete-team-membership']").click
+      end
+      page.should have_content "User was successfully removed!"
+      @team.members.should_not include(@player)
     end
   end
 

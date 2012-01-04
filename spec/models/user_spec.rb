@@ -122,6 +122,33 @@ describe User do
     end
   end
 
+  describe "associations" do
+    before(:each) do
+      @user = Factory(:user)
+      @team = Factory(:team)
+      @team.add_player(@user)
+      @team_membership = TeamMembership.where(team_id: @team.id, user_id: @user.id).first
+    end
+
+    it "has the team_memberships attribute" do
+      @user.should respond_to(:team_memberships)
+    end
+
+    it "has the corrent team_memberships" do
+      @user.team_memberships.should include(@team_membership)
+    end
+
+    it "has teams" do
+      @user.should respond_to(:teams)
+    end
+
+    it "should have the right teams" do
+      @team2 = Factory(:team)
+      @user.teams.should include(@team)
+      @user.teams.should_not include(@team2)
+    end
+  end
+
   describe "update associations" do
 
     before(:each) do

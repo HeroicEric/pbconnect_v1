@@ -18,9 +18,9 @@ FactoryGirl.define do
   end
 
   factory :team_membership do
-    role 'player'
     association :team
     association :user
+    role 'player'
   end
 
 end

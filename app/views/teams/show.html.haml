@@ -8,7 +8,8 @@
     = f.collection_select(:user_id, User.not_on_team(@team), :id, :name, {:include_blank => "Select User"}, {:class => 'chzn-select'})
     = f.submit "Add Member", class: "btn secondary"
 
-  %ul.members
+  .members
     - @team.members.each do |member|
-      %li
+      %div{id: "member-#{member.id}", class: "member"}
         = link_to member.name, user_path(member)
+        = button_to "Remove User", team_membership_path(@team.team_memberships.where(user_id: member.id).first), :method => :delete,  class: 'btn secondary', rel: 'delete-team-membership'

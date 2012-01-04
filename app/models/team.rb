@@ -13,6 +13,14 @@ class Team < ActiveRecord::Base
 
   validates :name, presence: true, length: { in: 3..35 }, uniqueness: true
 
+  def add_admin(user)
+    TeamMembership.create(team_id: id, user_id: user.id, role: 'admin')
+  end
+
+  def add_player(user)
+    TeamMembership.create(team_id: id, user_id: user.id, role: 'player')
+  end
+
   def role_of(user)
     team_memberships.find_by_user_id(user.id).role
   end

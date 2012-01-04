@@ -13,4 +13,10 @@ class TeamMembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    TeamMembership.find(params[:id]).destroy
+    flash[:success] = "User was successfully removed!"
+    redirect_to :back
+  end
+
 end

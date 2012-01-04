@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
 
   has_many :updates, :dependent => :destroy
 
+  has_many :team_memberships
+  has_many :teams, :through => :team_memberships
+
   def feed
     Update.from_self_and_followed_by(self)
   end

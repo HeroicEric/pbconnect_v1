@@ -91,6 +91,26 @@ describe Team do
         @team.role_of(@player_user).should == 'player'
       end
     end
+
+    describe "#add_admin(user)" do
+      it "makes the given user a team member with role of 'admin'" do
+        @team = Factory(:team)
+        @user = Factory(:user)
+        @team.add_admin(@user)
+        @team.members.should include(@user)
+        @team.admins.should include(@user)
+      end
+    end
+
+    describe "#add_player(user)" do
+      it "makes the given user a team member with role of 'admin'" do
+        @team = Factory(:team)
+        @user = Factory(:user)
+        @team.add_player(@user)
+        @team.members.should include(@user)
+        @team.admins.should_not include(@user)
+      end
+    end
   end
 
 end
