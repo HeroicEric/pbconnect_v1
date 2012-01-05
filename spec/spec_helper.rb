@@ -40,4 +40,8 @@ RSpec.configure do |config|
     fill_in 'Password', with: user.password
     click_button "Sign in"
   end
+
+  def logout_user
+    visit destroy_user_session_path
+  end
 end

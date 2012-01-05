@@ -61,11 +61,4 @@ describe TeamMembership do
       end
     end
   end
-
-  describe "#create" do
-    describe "failure" do
-
-    end
-  end
-
 end

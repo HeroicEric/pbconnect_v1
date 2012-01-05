@@ -9,10 +9,9 @@ end
 
 gem 'jquery-rails'
 gem "devise", ">= 1.5.0"
+gem 'cancan'
 gem 'haml'
 gem 'acts_as_follower'
-
-# Aesthetics
 gem 'twitter-bootstrap-rails'
 gem 'chosen-rails'
 

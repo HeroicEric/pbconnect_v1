@@ -9,7 +9,7 @@ describe "teams request" do
         login_user(@user)
       end
 
-      it "creates a team with valid information" do
+      it "creates a team if given valid information" do
         visit new_team_path
         fill_in "Name", with: "Dynasty"
         click_button "Save"
@@ -17,7 +17,7 @@ describe "teams request" do
         Team.find_by_name("Dynasty").should_not be_nil
       end
 
-      it "adds the current user to the roster as admin" do
+      it "adds the current user to the roster with admin privelages" do
         current_user = @user
         visit new_team_path
         fill_in "Name", with: "Dynasty"

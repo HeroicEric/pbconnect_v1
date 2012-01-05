@@ -11,6 +11,15 @@ describe User do
     }
   end
 
+  # it "can add a player to teams which he is an admin" do
+  #   admin = Factory(:user)
+  #   non_admin = Factory(:user)
+  #   team = Factory(:team)
+  #   ability = Ability.new(user)
+  #   ability.can?(:create, TeamMembership.new(team_id: team, user_id: admin.id, role: 'player'))
+  #   ability.cannot?(:create, TeamMembership.new(team_id: team, user_id: user.id, role: 'player'))
+  # end
+
   describe ".not_on_team(team)" do
     it "returns all Users who are not Members of given Team" do
       team = Factory(:team)
@@ -22,16 +31,16 @@ describe User do
     end
   end
 
-  it "should create a new instance given a valid attribute" do
+  it "creates a new instance given a valid attribute" do
     User.create!(@attr)
   end
 
-  it "should require an email address" do
+  it "requires an email address" do
     no_email_user = User.new(@attr.merge(:email => ""))
     no_email_user.should_not be_valid
   end
 
-  it "should accept valid email addresses" do
+  it "requires a valid email address" do
     addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
     addresses.each do |address|
       valid_email_user = User.new(@attr.merge(:email => address))
@@ -39,7 +48,7 @@ describe User do
     end
   end
 
-  it "should reject invalid email addresses" do
+  it "rejects invalid email addresses" do
     addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
     addresses.each do |address|
       invalid_email_user = User.new(@attr.merge(:email => address))
@@ -47,13 +56,13 @@ describe User do
     end
   end
 
-  it "should reject duplicate email addresses" do
+  it "rejects duplicate email addresses" do
     User.create!(@attr)
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid
   end
 
-  it "should reject email addresses identical up to case" do
+  it "rejects email addresses identical up to case" do
     upcased_email = @attr[:email].upcase
     User.create!(@attr.merge(:email => upcased_email))
     user_with_duplicate_email = User.new(@attr)
@@ -201,9 +210,6 @@ describe User do
         @user.feed.include?(@fred_update).should be_true
         @user.feed.include?(@bill_update).should be_false
       end
-
     end
-
   end
-
 end

@@ -1,4 +1,5 @@
 class TeamMembershipsController < ApplicationController
+  load_and_authorize_resource
 
   def create
     @team_membership = TeamMembership.new(

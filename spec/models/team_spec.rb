@@ -78,6 +78,11 @@ describe Team do
         @team.is_admin?(@non_admin_user).should be_false
         @team.is_admin?(@admin_user).should be_true
       end
+
+      it "returns false even if the user is not member of the team at all" do
+        non_member_user = Factory(:user)
+        @team.is_admin?(non_member_user).should == false
+      end
     end
 
     describe "#role_of" do

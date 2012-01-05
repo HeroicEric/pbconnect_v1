@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+
+  unauthorized:
+    create:
+      team_membership: "You are not allowed to add members to this team."
+    destroy:
+      team_membership: "You are not allowed to remove members from this team."

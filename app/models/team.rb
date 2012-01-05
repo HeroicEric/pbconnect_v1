@@ -26,6 +26,10 @@ class Team < ActiveRecord::Base
   end
 
   def is_admin?(user)
-    role_of(user) == "admin"
+    if members.include?(user)
+      role_of(user) == "admin"
+    else
+      false
+    end
   end
 end

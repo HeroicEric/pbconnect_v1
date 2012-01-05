@@ -41,6 +41,12 @@
                 %p
                   %strong It worked!
                   = flash[:success]
+            - if flash[:alert]
+              .alert-message.warning
+                %a.close{href: "#"} x
+                %p
+                  %strong Whoa there!
+                  = flash[:alert]
       #main{:role => "main"}
         = yield
       %footer
