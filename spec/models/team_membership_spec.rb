@@ -9,7 +9,7 @@ describe TeamMembership do
     @attr = {
       team: @team,
       member: @user,
-      role: 'player'
+      role: 'member'
     }
   end
 
@@ -18,9 +18,17 @@ describe TeamMembership do
       TeamMembership.create!(@attr)
     end
 
-    it "requires a role" do
-      @team_membership = TeamMembership.new(@attr.merge(role: nil))
-      @team_membership.should_not be_valid
+    describe "a valid role" do
+      it "cannot be blank" do
+        @team_membership = TeamMembership.new(@attr.merge(role: nil))
+        @team_membership.should_not be_valid
+      end
+
+      it "must be one of the defined roles" do
+        TeamMembership.new(@attr.merge(role: 'president')).should_not be_valid
+        TeamMembership.new(@attr.merge(role: 'member')).should be_valid
+        TeamMembership.new(@attr.merge(role: 'admin')).should be_valid
+      end
     end
 
     it "requires that the user_id and team_id combo be unique" do

@@ -71,7 +71,7 @@ describe Team do
         @admin_user = Factory(:user)
         @non_admin_user = Factory(:user)
         RosterAddition.new(team: @team, member: @admin_user, role: 'admin')
-        RosterAddition.new(team: @team, member: @non_admin_user, role: 'player')
+        RosterAddition.new(team: @team, member: @non_admin_user, role: 'member')
       end
 
       it "returns whether or not the user is an admin of the team" do
@@ -89,11 +89,11 @@ describe Team do
       it "returns the role within the team for a given user" do
         @team = Factory(:team)
         @admin_user = Factory(:user)
-        @player_user = Factory(:user)
+        @member_user = Factory(:user)
         RosterAddition.new(team: @team, member: @admin_user, role: 'admin')
-        RosterAddition.new(team: @team, member: @player_user, role: 'player')
+        RosterAddition.new(team: @team, member: @member_user, role: 'member')
         @team.role_of(@admin_user).should == 'admin'
-        @team.role_of(@player_user).should == 'player'
+        @team.role_of(@member_user).should == 'member'
       end
     end
 
@@ -105,13 +105,21 @@ describe Team do
         @team.members.should include(@user)
         @team.admins.should include(@user)
       end
-    end
 
-    describe "#add_player(user)" do
-      it "makes the given user a team member with role of 'admin'" do
+      it "does nothing if the user is already an admin" do
         @team = Factory(:team)
         @user = Factory(:user)
-        @team.add_player(@user)
+        @team.add_admin(@user)
+        @team.add_admin(@user)
+        @team.team_memberships.where(user_id: @user.id).count.should == 1
+      end
+    end
+
+    describe "#add_member(user, role: 'member')" do
+      it "adds a user to the team with role of member" do
+        @team = Factory(:team)
+        @user = Factory(:user)
+        @team.add_member(@user)
         @team.members.should include(@user)
         @team.admins.should_not include(@user)
       end

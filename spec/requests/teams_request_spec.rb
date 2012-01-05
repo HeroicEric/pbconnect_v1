@@ -70,7 +70,34 @@ describe "teams request" do
           page.should have_link(member.name, href: user_path(member))
         end
       end
+
+      context "user is admin" do
+        describe "showing the admninistrative actions" do
+
+          describe "remove member button" do
+            it "shows the remove member button" do
+              @team.active_users.each do |user|
+                within("#member-#{user.id}") do
+                  page.should have_css("input[@rel='delete-team-membership']")
+                end
+              end
+            end
+          end
+
+          it "shows the 'make admin' button for users that are not admins" do
+            @team.active_users.each do |user|
+              within("#member-#{user.id}") do
+                if @team.is_admin?(user)
+                  page.should_not have_css("input[@rel='make-admin']")
+                else
+                  page.should have_css("input[@rel='make-admin']")
+                end
+              end
+            end
+          end
+        end
+      end
+
     end
   end
-
 end

@@ -1,4 +1,6 @@
 Rails3DeviseRspecCucumber::Application.routes.draw do
+  get "team_membership/update"
+
   #get \"users\/show\"
 
   root :to => "home#index"
@@ -12,7 +14,7 @@ Rails3DeviseRspecCucumber::Application.routes.draw do
 
   resources :updates,          :only => [:create, :destroy]
   resources :teams,            :only => [:index, :show, :new, :create]
-  resources :team_memberships, :only => [:create, :destroy]
+  resources :team_memberships, :only => [:create, :update, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

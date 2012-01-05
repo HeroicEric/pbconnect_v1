@@ -26,7 +26,7 @@ describe RosterAddition do
       RosterAddition.new(team: team, member: admin)
       RosterAddition.new(team: team, member: user)
       team_membership = TeamMembership.where(user_id: user.id).first
-      team_membership.role.should == 'player'
+      team_membership.role.should == 'member'
     end
   end
 end

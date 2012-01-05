@@ -11,15 +11,6 @@ describe User do
     }
   end
 
-  # it "can add a player to teams which he is an admin" do
-  #   admin = Factory(:user)
-  #   non_admin = Factory(:user)
-  #   team = Factory(:team)
-  #   ability = Ability.new(user)
-  #   ability.can?(:create, TeamMembership.new(team_id: team, user_id: admin.id, role: 'player'))
-  #   ability.cannot?(:create, TeamMembership.new(team_id: team, user_id: user.id, role: 'player'))
-  # end
-
   describe ".not_on_team(team)" do
     it "returns all Users who are not Members of given Team" do
       team = Factory(:team)
@@ -28,6 +19,16 @@ describe User do
       RosterAddition.new(team: team, member: @team_user)
       User.not_on_team(team).should include(@teamless_user)
       User.not_on_team(team).should_not include(@team_user)
+    end
+  end
+
+  describe "#membership_with(team)" do
+    it "gets the team membership that links the user with given team" do
+      team = Factory(:team)
+      user = Factory(:user)
+      team.add_member(user)
+      team_membership = team.team_memberships.where(user_id: user.id).first
+      user.membership_with(team).should == team_membership
     end
   end
 
@@ -135,7 +136,7 @@ describe User do
     before(:each) do
       @user = Factory(:user)
       @team = Factory(:team)
-      @team.add_player(@user)
+      @team.add_member(@user)
       @team_membership = TeamMembership.where(team_id: @team.id, user_id: @user.id).first
     end
 

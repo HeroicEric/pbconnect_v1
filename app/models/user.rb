@@ -35,4 +35,8 @@ class User < ActiveRecord::Base
   def self.not_on_team(team)
     User.where("id NOT IN (?)", team.member_ids)
   end
+
+  def membership_with(team)
+    team_memberships.where(team_id: team.id).first
+  end
 end

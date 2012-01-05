@@ -18,4 +18,9 @@
       - @team.members.each do |member|
         %tr{id: "member-#{member.id}", class: "member"}
           %td= link_to member.name, user_path(member)
-          %td= button_to "Remove User", team_membership_path(@team.team_memberships.where(user_id: member.id).first), :method => :delete,  class: 'btn danger', rel: 'delete-team-membership'
+          %td
+            - unless @team.is_admin?(member)
+              = form_for member.membership_with(@team) do |f|
+                = f.hidden_field :role, value: 'admin'
+                = f.submit 'Make Admin', class: 'btn', rel: 'make-admin'
+            = button_to "Remove User", team_membership_path(@team.team_memberships.where(user_id: member.id).first), :method => :delete,  class: 'btn danger', rel: 'delete-team-membership'
