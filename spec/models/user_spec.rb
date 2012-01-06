@@ -20,6 +20,12 @@ describe User do
       User.not_on_team(team).should include(@teamless_user)
       User.not_on_team(team).should_not include(@team_user)
     end
+
+    it "returns all Users when the team has no members" do
+      3.times do Factory(:user) end
+      team = Factory(:team)
+      User.not_on_team(team).should == User.all
+    end
   end
 
   describe "#membership_with(team)" do

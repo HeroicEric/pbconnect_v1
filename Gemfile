@@ -22,6 +22,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem "rspec-rails", ">= 2.8.0.rc1"
+  gem 'faker'
   gem 'nyan-cat-formatter' # This is super important!
 end
 

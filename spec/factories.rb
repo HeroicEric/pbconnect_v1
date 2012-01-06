@@ -3,7 +3,7 @@ require 'factory_girl'
 FactoryGirl.define do
 
   factory :user do
-    sequence(:name){|n| "Fake User #{n}"}
+    sequence(:name){|n| "Fake Name #{n}"}
     password "foobar"
     sequence(:email){|n| "foo#{n}@bar.com"}
   end
