@@ -21,7 +21,9 @@
               %li= link_to "Teams", teams_path
             %ul.nav.account-nav
               = render 'shared/navigation'
-    #container.container
+
+    .container-fluid
+
       - unless flash.empty?
         .row
           .span16
@@ -47,6 +49,5 @@
                 %p
                   %strong Whoa there!
                   = flash[:alert]
-      #main{:role => "main"}
-        = yield
-      %footer
+
+      = yield

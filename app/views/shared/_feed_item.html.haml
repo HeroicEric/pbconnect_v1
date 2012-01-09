@@ -1,3 +1,7 @@
-%li
-  %b= feed_item.user.name
-  = feed_item.content
+.span8.update.clearfix
+  %a{href: user_path(feed_item.user)}
+    = image_tag "http://placehold.it/48x48", class: "avatar"
+  .meat
+    %b= feed_item.user.name
+    .content= feed_item.content
+    %span.timestamp #{time_ago_in_words(feed_item.created_at)} ago

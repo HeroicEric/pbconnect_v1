@@ -76,7 +76,7 @@ describe "teams request" do
         fill_in "Name", with: "Dynasty"
         click_button "Save"
         team = Team.find_by_name("Dynasty")
-        team.members.where("team_memberships.role = 'admin'").should include(current_user)
+        team.members.where("team_memberships.role = ?", "admin").should include(current_user)
       end
     end
   end

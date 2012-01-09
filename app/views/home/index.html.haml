@@ -1,6 +1,16 @@
 - if user_signed_in?
-  = render 'shared/update_form'
-  = render partial: 'shared/update_feed'
+  .sidebar
+    .well
+      .mini-profile
+        = image_tag "http://placehold.it/32x32", alt: "profile thumb", class: "pull-left avatar"
+        %h3= link_to current_user.name, user_path(current_user)
+  .content
+    .span8
+      = render 'shared/update_form'
+    - unless @feed_items.empty?
+      = render partial: 'shared/feed_item', collection: @feed_items
+      .updates
+        = paginate @feed_items
 - else
   %h1 Join the fun!
   = link_to 'Sign up', new_user_registration_path, class: "btn large primary"

@@ -7,13 +7,11 @@
  *= require chosen
  *= require_tree .
 */
+
 header nav ul {
   list-style: none;
   margin: 0 0 2em;
   padding: 0;
-}
-header nav ul li {
-  display: inline;
 }
 #flash_notice, #flash_alert {
   padding: 5px 8px;
@@ -33,4 +31,23 @@ header nav ul li {
 }
 .nav.account-nav {
   float: right;
+}
+
+.mini-profile {
+  margin-bottom: 10px;
+}
+
+.avatar { margin-right: 10px; }
+
+.update {
+  min-height: 70px;
+  border-bottom: 1px solid #E8E8E8;
+  margin-bottom: 20px;
+
+  .avatar { float: left; }
+}
+
+.timestamp {
+  color: #bbb;
+  font-size: 11px;
 }

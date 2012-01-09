@@ -91,6 +91,8 @@ GEM
       thor (~> 0.14)
     json (1.6.1)
     json_pure (1.6.1)
+    kaminari (0.12.4)
+      rails (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     less (2.0.7)
@@ -206,6 +208,7 @@ DEPENDENCIES
   faker
   haml
   jquery-rails
+  kaminari
   launchy (>= 2.0.5)
   nyan-cat-formatter
   pg

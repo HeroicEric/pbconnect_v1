@@ -12,6 +12,7 @@ gem "devise", ">= 1.5.0"
 gem 'cancan'
 gem 'haml'
 gem 'acts_as_follower'
+gem 'kaminari'
 gem 'twitter-bootstrap-rails'
 gem 'chosen-rails'
 

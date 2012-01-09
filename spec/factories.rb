@@ -9,7 +9,7 @@ FactoryGirl.define do
   end
 
   factory :update do
-    sequence(:content){|n| "posted update#{n}." }
+    sequence(:content){|n| Faker::Lorem.sentence(10) }
     association :user
   end
 
