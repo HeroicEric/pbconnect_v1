@@ -17,7 +17,11 @@ You can run the tests with the following:
   
     rspec spec
 
-Ideally you will run the tests using the spin and kicker gems. Start by starting up the spin server with
+Ideally you will run the tests using the spin and kicker gems. Install the gems using the following:
+
+    gem install spin kicker
+
+Start by starting up the spin server with
 
     spin serve
 
