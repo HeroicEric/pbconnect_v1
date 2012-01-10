@@ -8,9 +8,9 @@ PBConnect is a tool that is meant to be used to help paintball players and paint
 
 ## Why?
 
-I wrote this project because I see a problem that currently needs to be solved and thought that this would be a good opportunity to get some development practice with rails regardless of whether or not the idea proves to be something that others are interested in. 
+I am writing this address a problem that, in my opinion, needs to be solved. No matter the outcome, working on this project has taught me a lot and will continue to do so.
 
-This topic is something that I personally have an interest in improving so I think that I am in a good position to understand the needs of my target audience.
+I chose to submit this project with my application because, even though it is nowhere near completed, I think that this is the best example of my current abilities and understanding.
 
 This project was also a good way to force myself to stop trying to read everything and make sure that all my code would be perfect, which was really keeping me from actually making anything. I've learned a lot already and it's now easy to understand that reading/learning about things is only half the battle. To truly understand how things work, I need to spend time playing around and making mistakes.
 
